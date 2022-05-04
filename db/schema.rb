@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_04_225311) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_04_225827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "tweets", force: :cascade do |t|
+    t.text "body"
+    t.integer "replies_count", default: 0
+    t.integer "likes_count", default: 0
+    t.bigint "user_id", null: false
+    t.bigint "replied_to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["replied_to_id"], name: "index_tweets_on_replied_to_id"
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -26,4 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_225311) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "tweets", "tweets", column: "replied_to_id"
+  add_foreign_key "tweets", "users"
 end
