@@ -1,0 +1,126 @@
+.form-tweet{
+    position: relative;
+    margin: 1rem auto;
+    max-width: 330px;
+    height: 136px;
+    text-align: center;
+    background-color: white;
+}
+
+.input--home {
+    position: absolute;
+    border: none;
+    height: 90%;
+    outline: none;
+    appearance: none;
+}
+
+.button--home {
+    position: absolute;
+    width: 30%;
+    bottom: 0;
+    right: 0;
+}
+
+.tweets {
+    
+    max-width: 330px;
+    margin: 1rem auto;
+}
+
+.tweet-card {
+    background-color: white;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s linear;
+}
+
+.tweet-card:hover {
+    transform: scale(1.07);
+}
+
+.tweet-card a {
+    text-decoration: none;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-info .name {
+    font-family: var(--font-subtitle);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-400);
+}
+
+.header-info .username {
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--primary-300);
+}
+
+.header-info .time {
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--gray-300);
+}
+
+.tweet-card p {
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-400);
+    text-align: justify;
+    margin-left: 3%;
+    text-transform: capitalize;
+}
+
+.card-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+    margin-left: 3%;
+}
+
+.buttons-edit-trash {
+    display: flex;
+    gap: 1rem;
+}
+
+.buttons-like-com {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.buttons-like-com span {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    font-family: var(--font-subtitle);
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-300);
+}
+
+.buttons-like-com a {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    font-family: var(--font-subtitle);
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-300);
+}

@@ -1,21 +1,23 @@
-<%= form_with(model: tweet) do |form| %>
-  <% if tweet.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+<div data-turbo="false">
+  <%= form_with(model: tweet) do |form| %>
+    <% if tweet.errors.any? %>
+      <div style="color: red">
+        <ul>
+          <% tweet.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-tweet">
+      <div>
+        <%= form.text_area :body, placeholder: "Remember to thing before write...", class: "input input--home" %>
+      </div>
 
-      <ul>
-        <% tweet.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <div>
+        <%= form.submit button, class: "normal-button button--home" %>
+      </div>
     </div>
   <% end %>
-
-  <div>
-    <%= form.text_area :body, placeholder: "Remember to thing before write..." %>
-  </div>
-
-  <div>
-    <%= form.submit "Tweet" %>
-  </div>
-<% end %>
+</div>

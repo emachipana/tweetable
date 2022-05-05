@@ -2,6 +2,7 @@
 @import url("layouts/colors.css");
 @import url("pages/header.css");
 @import url("pages/sessions.css");
+@import url("pages/home.css");
 
 * {
     padding: 0;
