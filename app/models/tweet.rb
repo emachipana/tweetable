@@ -11,8 +11,8 @@ class Tweet < ApplicationRecord
   private
 
   def main_tweet_exists?
-    if replied_to_id && Tweet.find_by(id: replied_to_id).nil?
-      errors.add(:replied_to_id, "Should be a valid tweet id")
-    end
+    return unless replied_to_id && Tweet.find_by(id: replied_to_id).nil?
+
+    errors.add(:replied_to_id, "Should be a valid tweet id")
   end
 end
