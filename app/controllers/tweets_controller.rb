@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   def update
     if @tweet.update(tweet_params)
-      redirect_to @tweet, notice: "Tweet was successfully updated."
+      redirect_to tweets_path, notice: "Tweet was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   def destroy
     @tweet.destroy
-    redirect_to tweets_url, notice: "Tweet was successfully destroyed."
+    redirect_to tweets_path, notice: "Tweet was successfully destroyed."
   end
 
   private

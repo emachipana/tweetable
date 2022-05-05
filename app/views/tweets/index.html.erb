@@ -1,40 +1,60 @@
-<h1>Home</h1>
+<div class="section-login">
+  <h1 class="login-title">Home</h1>
 
-<% if user_signed_in?  %>
-  <%= render "form", tweet: @tweet %>
-<% end %>
-
-<div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <div>
-      <%= link_to tweet_path(tweet) do %>
-        <% if tweet.user.avatar.attached? %>
-          <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
-        <% else %>
-          <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
-        <% end %>
-        <span><%= tweet.user.name %></span>
-        <span>@<%= tweet.user.username %></span>
-        <% hours = Time.now.strftime("%H").to_i - tweet.created_at.strftime("%M").to_i %>
-        <% mins = Time.now.strftime("%M").to_i - tweet.created_at.strftime("%M").to_i %>
-        <p>
-          <% if hours <= 0 && mins > 0 %>
-            <%= mins %> minutes ago
-          <% elsif mins < 0 %>
-            1 hour ago
-          <% else %>
-            <%= hours %> hours ago
-          <% end %>
-        </p>
-        <p><%= tweet.body %></p>
-        <span><%= tweet.replies_count %> retweets</span>
-        <span><%= tweet.likes_count %> likes</span>
-        <% if current_user && tweet.user.id == current_user.id %>
-          <br />
-          <span><%= link_to "Edit tweet", edit_tweet_path(tweet) %><span>
-          <span><%= link_to "Destroy tweet", edit_tweet_path(tweet), data: { turbo_method: :delete } %><span>
-        <% end %>
-      </div>
-      <% end %>
+  <% if user_signed_in?  %>
+    <%= render "form", tweet: @tweet, button: "Tweet" %>
   <% end %>
+
+  <div id="tweets" class="tweets">
+    <% @tweets.each do |tweet| %>
+      <div class="tweet-card" >
+        <%= link_to tweet_path(tweet) do %>
+          <div class="card-header">
+            <div class="header-avatar">
+              <% if tweet.user.avatar.attached? %>
+                <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
+              <% else %>
+                <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
+              <% end %>
+            </div>
+            <div class="header-info">
+              <span class="name"><%= tweet.user.name %></span>
+              <span class="username">@<%= tweet.user.username %></span>
+              <% hours = Time.now.strftime("%H").to_i - tweet.created_at.strftime("%M").to_i %>
+              <% mins = Time.now.strftime("%M").to_i - tweet.created_at.strftime("%M").to_i %>
+              <p class="time">
+                <% if hours <= 0 && mins > 0 %>
+                  <%= mins %> minutes ago
+                <% elsif mins < 0 %>
+                  1 hour ago
+                <% else %>
+                  <%= hours %> hours ago
+                <% end %>
+              </p>
+            </div>
+          </div>
+          <p><%= tweet.body %></p>
+        <% end %>
+        <div class="card-buttons">
+          <div class="buttons-edit-trash">
+            <% if current_user && tweet.user.id == current_user.id %>
+              <%= link_to tweet_path(tweet), data: { turbo_method: :delete } do %>
+                <%= image_tag("icons/trash.png", size: "16x18") %>
+              <% end %>
+              <%= link_to edit_tweet_path(tweet) do %>
+                <%= image_tag("icons/edit.png", size: "16x18") %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="buttons-like-com">
+            <span><%= image_tag("icons/tweets.png", size: "18x16") %><%= tweet.replies_count %></span>
+              <%= link_to do %>
+                <%= image_tag("icons/like.png", size: "18x16") %>
+              <%= tweet.likes_count %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
