@@ -6,11 +6,11 @@ class User < ApplicationRecord
   # has_and_belongs_to_many :likes, :join_table => 'likes', :class_name => 'Tweet'
   # has_many :tweets
 
-  #has_many :tweets, :through => :likes
-  has_many :likes
-  has_many :tweets
+  # has_many :tweets, :through => :likes
+  has_many :likes, dependent: :destroy
+  has_many :tweets, dependent: :destroy
 
-  enum :role, { admin:0 ,regular:1 }
+  enum :role, { admin: 0, regular: 1 }
 
   def self.from_omniauth(auth_hash)
     where(provider: auth_hash.provider, uid: auth_hash.uid).first_or_create do |user|
@@ -18,7 +18,7 @@ class User < ApplicationRecord
       user.uid = auth_hash.uid
       user.username = auth_hash.info.nickname
       user.email = auth_hash.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 end
