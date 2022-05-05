@@ -1,44 +1,50 @@
-<h2>Create an account</h2>
-<p>continue with</p>
-<%= render "devise/shared/omniauth" %>
-<p>or</p>
+<div data-turbo="false", class="section-login" >
+  <h2 class="login-title">Create an account</h2>
+  <div class="session-card">
+    <p class="card-text">continue with</p>
+    <%= render "devise/shared/omniauth" %>
+    <p class="card-text">or</p>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "example" %>
-  </div>
+      <div class="field">
+        <%= f.label :username, class: "card-text" %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "example", class: "input" %>
+      </div>
   
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com" %>
-  </div>
+      <div class="field">
+        <%= f.label :email, class: "card-text" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com", class: "input" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, placeholder: "John Doe" %>
-  </div>
+      <div class="field">
+        <%= f.label :name, class: "card-text" %><br />
+        <%= f.text_field :name, autofocus: true, placeholder: "John Doe", class: "input" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :avatar, style: "display: block" %>
-    <%= f.file_field :avatar %>
-  </div>
+      <div class="field">
+        <%= f.label :avatar, style: "display: block", class: "card-text" %>
+        <%= f.file_field :avatar, class: "file-select" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "************" %>
-  </div>
+      <div class="field">
+        <%= f.label :password, class: "card-text" %><br />
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "************", class: "input" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "************" %>
-  </div>
+      <div class="field">
+        <%= f.label :password_confirmation, class: "card-text" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "************", class: "input" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class="actions">
+        <%= f.submit "Sign up", class: "normal-button" %>
+      </div>
+    <% end %>
 
-<%= render "devise/shared/links" %>
+    <p class="card-text message">Already member?</p>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

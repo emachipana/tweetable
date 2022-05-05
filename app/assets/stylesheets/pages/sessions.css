@@ -1,0 +1,115 @@
+.section-login {
+    margin: 2rem auto;
+    max-width: 720px;
+}
+
+.login-title {
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--gray-400);
+    text-align: center;
+}
+
+.session-card {
+    background-color: white;
+    padding: 1rem;
+    max-width: 330px;
+    margin: 1rem auto;
+    border-radius: 10px;
+    box-shadow:  0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 4px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-text {
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+}
+
+.button-github {
+    border: none;
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-300);
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    font-family: var(--font-subtitle);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.input {
+    padding: 0.5rem 12px;
+    background-color: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-400);
+    margin: 0.8rem 0; 
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.normal-button {
+    background-color: var(--primary-300);
+    padding: 0.5rem 12px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    font-family: var(--font-subtitle);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.message {
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.link-session {
+    text-decoration: none;
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--primary-500);
+}
+
+.error-message {
+    color: var(--error-300);
+    margin: 0.5rem 0;
+}
+
+.file-select {
+    margin: 0.8rem 0;
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-400);
+}
