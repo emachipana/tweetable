@@ -1,57 +1,59 @@
-<h2>Edit Profile</h2>
+<div data-turbo="false", class="section-login" >
+  <h2 class="login-title">Edit Profile</h2>
 
-<div data-turbo="false">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="session-card">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :username %><br />
-      <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "example" %>
-    </div>
+      <div class="field">
+        <%= f.label :username, class: "card-text"%><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "example", class: "input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com", disabled: true %>
-    </div>
+      <div class="field">
+        <%= f.label :email, class: "card-text" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com", disabled: true, class: "input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, placeholder: "John Doe" %>
-    </div>
+      <div class="field">
+        <%= f.label :name, class: "card-text" %><br />
+        <%= f.text_field :name, autofocus: true, placeholder: "John Doe", class: "input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :avatar, style: "display: block" %>
-      <% if @user.avatar.attached? %>
-        <div>
-          <%= image_tag(@user.avatar, size: "60x60", style: "border-radius: 50px") %>
-        </div>
-      <% else %>
-        <div>
-          <%= image_tag("default_image.png", size: "60x60", style: "border-radius: 50px") %>
-        </div>
-      <% end %>
-      <%= f.file_field :avatar %>
-    </div>
+      <div class="field">
+        <%= f.label :avatar, style: "display: block", class: "card-text" %>
+        <% if @user.avatar.attached? %>
+          <div>
+            <%= image_tag(@user.avatar, size: "60x60", style: "border-radius: 50px") %>
+          </div>
+        <% else %>
+          <div>
+            <%= image_tag("default_image.png", size: "60x60", style: "border-radius: 50px") %>
+          </div>
+        <% end %>
+        <%= f.file_field :avatar, class: "file-select" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: "**************" %>
-    </div>
+      <div class="field">
+        <%= f.label :password, class: "card-text" %><br />
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "**************", class: "input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "**************" %>
-    </div>
+      <div class="field">
+        <%= f.label :password_confirmation, class: "card-text" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "**************", class: "input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :current_password %><br />
-      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "**************" %>
-    </div>
+      <div class="field">
+        <%= f.label :current_password, class: "card-text" %><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "**************", class: "input" %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit "Update" %>
-    </div>
-  <% end %>
+      <div class="actions">
+        <%= f.submit "Update", class: "normal-button" %>
+      </div>
+    <% end %>
   
-  <%= link_to "Back", :back %>
+    <%= link_to "Back", :back, class: "link-session" %>
+  </div>
 </div>
