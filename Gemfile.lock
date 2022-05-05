@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: b78a47e64d79863dfb2a987c84157a8b0de3a037
+  branch: master
+  specs:
+    faker (2.20.0)
+      i18n (>= 1.8.11, < 2)
+
+GIT
   remote: https://github.com/omniauth/omniauth-github.git
   revision: 1f772263c6cc00e84dabbc02beb755ba4c95f7d1
   branch: master
@@ -289,6 +297,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  faker!
   image_processing (~> 1.2)
   importmap-rails
   omniauth-github!
