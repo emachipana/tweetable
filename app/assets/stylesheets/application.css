@@ -1,8 +1,13 @@
 @import url("layouts/typography.css");
 @import url("layouts/colors.css");
 @import url("pages/header.css");
+@import url("pages/sessions.css");
 
 * {
     padding: 0;
     margin: 0;
+}
+
+body {
+    background-color: var(--gray-100);
 }

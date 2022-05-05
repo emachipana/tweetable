@@ -1,23 +1,30 @@
-<h2>Sign in to your account</h2>
-<p>continue with</p>
-<%= render "devise/shared/omniauth" %>
-<p>or</p>
+<div data-turbo="false" class="section-login">
+  <h2 class="login-title" >Sign in to your account</h2>
+  <div class="session-card">
+    <p class="card-text">continue with</p>
+    <%= render "devise/shared/omniauth" %>
+    <p class="card-text">or</p>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email, class: "card-text" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com", class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, class: "card-text" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "*********", class: "input" %>
+      </div>
+
+      <p class="link-session error-message"><%= notice %></p>
+      <p class="link-session error-message"><%= alert %></p>
+
+      <div class="actions">
+        <%= f.submit "SIGN IN", class: "normal-button" %>
+      </div>
+    <% end %>
+    <p class="card-text message">Don't have an account?</p>
+
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "*********" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "SIGN IN" %>
-  </div>
-<% end %>
-<p>Don't have an account?</p>
-
-<%= render "devise/shared/links" %>
+</div>

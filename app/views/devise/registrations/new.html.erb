@@ -3,6 +3,7 @@
 <%= render "devise/shared/omniauth" %>
 <p>or</p>
 
+<div data-turbo="false">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -41,4 +42,6 @@
   </div>
 <% end %>
 
+
 <%= render "devise/shared/links" %>
+</div>
