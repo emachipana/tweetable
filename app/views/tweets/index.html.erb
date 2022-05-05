@@ -1,6 +1,8 @@
-<p style="color: green"><%= notice %></p>
+<h1>Home</h1>
 
-<h1>Tweets</h1>
+<% if user_signed_in?  %>
+  <%= render "form", tweet: @tweet %>
+<% end %>
 
 <div id="tweets">
   <% @tweets.each do |tweet| %>
@@ -10,5 +12,3 @@
     </p>
   <% end %>
 </div>
-
-<%= link_to "New tweet", new_tweet_path %>
