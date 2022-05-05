@@ -3,8 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
-  # has_and_belongs_to_many :likes, :join_table => 'likes', :class_name => 'Tweet'
-  # has_many :tweets
+  
+  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
 
   # has_many :tweets, :through => :likes
   has_many :likes, dependent: :destroy
