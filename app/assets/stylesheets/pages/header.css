@@ -1,0 +1,35 @@
+.navbar {
+    background-color: var(--gray-100);
+    display: flex;
+    padding: 1rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: var(--primary-500);
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: all 0.4s;
+}
+
+.link a:hover {
+    background-color: var(--primary-300);
+    color: white;
+}
