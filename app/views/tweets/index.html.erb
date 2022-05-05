@@ -6,9 +6,35 @@
 
 <div id="tweets">
   <% @tweets.each do |tweet| %>
-    <%= render tweet %>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-    </p>
+    <div>
+      <%= link_to tweet_path(tweet) do %>
+        <% if tweet.user.avatar.attached? %>
+          <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
+        <% else %>
+          <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
+        <% end %>
+        <span><%= tweet.user.name %></span>
+        <span>@<%= tweet.user.username %></span>
+        <% hours = Time.now.strftime("%H").to_i - tweet.created_at.strftime("%M").to_i %>
+        <% mins = Time.now.strftime("%M").to_i - tweet.created_at.strftime("%M").to_i %>
+        <p>
+          <% if hours <= 0 && mins > 0 %>
+            <%= mins %> minutes ago
+          <% elsif mins < 0 %>
+            1 hour ago
+          <% else %>
+            <%= hours %> hours ago
+          <% end %>
+        </p>
+        <p><%= tweet.body %></p>
+        <span><%= tweet.replies_count %> retweets</span>
+        <span><%= tweet.likes_count %> likes</span>
+        <% if current_user && tweet.user.id == current_user.id %>
+          <br />
+          <span><%= link_to "Edit tweet", edit_tweet_path(tweet) %><span>
+          <span><%= link_to "Destroy tweet", edit_tweet_path(tweet), data: { turbo_method: :delete } %><span>
+        <% end %>
+      </div>
+      <% end %>
   <% end %>
 </div>
