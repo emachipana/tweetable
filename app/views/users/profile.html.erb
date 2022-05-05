@@ -1,0 +1,14 @@
+<h2>Profile</h2>
+<% if @user.avatar.attached? %>
+  <div>
+    <%= image_tag(@user.avatar, size: "96x96", style: "border-radius: 50px") %>
+  </div>
+<% else %>
+  <div>
+    <%= image_tag("default_image.png", size: "96x96", style: "border-radius: 50px") %>
+  </div>
+<% end %>
+<h3><%= @user.name %></h3>
+<p>@<%= @user.username %></p>
+<p>Joined on <%=  @user.created_at.strftime('%B %d, %Y')%></p>
+<%= link_to "Edit Profile", edit_user_registration_path %>
