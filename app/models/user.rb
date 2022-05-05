@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :tweets, dependent: :destroy
 
+  has_one_attached :avatar
+
   enum :role, { admin: 0, regular: 1 }
 
   def self.from_omniauth(auth_hash)
