@@ -3,6 +3,7 @@
 @import url("pages/header.css");
 @import url("pages/sessions.css");
 @import url("pages/home.css");
+@import url("pages/footer.css");
 
 * {
     padding: 0;
