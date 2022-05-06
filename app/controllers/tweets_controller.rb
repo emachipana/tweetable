@@ -8,7 +8,9 @@ class TweetsController < ApplicationController
   end
 
   # GET /tweets/1
-  def show; end
+  def show
+    @new_tweet = Tweet.new
+  end
 
   # GET /tweets/1/edit
   def edit; end
