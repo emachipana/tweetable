@@ -70,9 +70,10 @@
 .header-info .time {
     font-family: var(--font-subtitle);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     color: var(--gray-300);
+    width: 100%;
 }
 
 .tweet-card p {
@@ -115,7 +116,11 @@
     color: var(--gray-300);
 }
 
-.buttons-like-com a {
+.buttons-like-com button {
+    appearance: none;
+    background-color: white;
+    border: none;
+    cursor: pointer;
     display: flex;
     gap: 0.3rem;
     align-items: center;

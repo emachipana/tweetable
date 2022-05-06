@@ -6,7 +6,7 @@
   <% end %>
 
   <div id="tweets" class="tweets">
-    <% @tweets.each do |tweet| %>
+    <% @tweets.sort.each do |tweet| %>
       <div class="tweet-card" >
         <%= link_to tweet_path(tweet) do %>
           <div class="card-header">
@@ -20,17 +20,7 @@
             <div class="header-info">
               <span class="name"><%= tweet.user.name %></span>
               <span class="username">@<%= tweet.user.username %></span>
-              <% hours = Time.now.strftime("%H").to_i - tweet.created_at.strftime("%M").to_i %>
-              <% mins = Time.now.strftime("%M").to_i - tweet.created_at.strftime("%M").to_i %>
-              <p class="time">
-                <% if hours <= 0 && mins > 0 %>
-                  <%= mins %> minutes ago
-                <% elsif mins < 0 %>
-                  1 hour ago
-                <% else %>
-                  <%= hours %> hours ago
-                <% end %>
-              </p>
+              <p class="time"><%= time_ago_in_words(tweet.created_at) %> ago</p>
             </div>
           </div>
           <p><%= tweet.body %></p>
@@ -48,9 +38,17 @@
           </div>
           <div class="buttons-like-com">
             <span><%= image_tag("icons/tweets.png", size: "18x16") %><%= tweet.replies_count %></span>
-              <%= link_to do %>
+
+            <% if current_user && tweet.likes.find { |like| like.user.id == current_user.id } %>
+              <%= button_to tweet_likes_path(tweet) do %>
+                <%= image_tag("icons/like-p.png", size: "18x16") %>
+                <%= tweet.likes_count %>
+              <% end %>
+            <% else %>
+              <%= button_to tweet_likes_path(tweet) do %>
                 <%= image_tag("icons/like.png", size: "18x16") %>
-              <%= tweet.likes_count %>
+                <%= tweet.likes_count %>
+              <% end %>
             <% end %>
           </div>
         </div>
