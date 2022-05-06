@@ -1,14 +1,134 @@
-<h2>Profile</h2>
-<% if @user.avatar.attached? %>
-  <div>
-    <%= image_tag(@user.avatar, size: "96x96", style: "border-radius: 50px") %>
+<div class="section-login">
+  <h2 class="login-title">Profile</h2>
+  <div class="section-profile">
+    <% if @user.avatar.attached? %>
+      <div>
+        <%= image_tag(@user.avatar, size: "96x96", style: "border-radius: 50px") %>
+      </div>
+    <% else %>
+      <div>
+        <%= image_tag("default_image.png", size: "96x96", style: "border-radius: 50px") %>
+      </div>
+    <% end %>
+    <h3 class="login-title"><%= @user.name %></h3>
+    <p class="profile-info">@<%= @user.username %></p>
+    <p class="profile-info">Joined on <%=  @user.created_at.strftime('%B %d, %Y')%></p>
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "normal-button edit--button" %>
   </div>
-<% else %>
-  <div>
-    <%= image_tag("default_image.png", size: "96x96", style: "border-radius: 50px") %>
+
+  <ul id="links-header" class="links-header">
+    <li class="active">
+      <a href="#tweets">Tweets (<%= @user.tweets.count %>)</a>
+    </li>
+    <li>
+      <a href="#likes">Likes (<%= @user.likes.count %>)</a>
+    </li>
+  </ul>
+
+  <div id="tweets-likes">
+
+      <div id="tweets" class="tweets">
+        <% @user.tweets.sort.each do |tweet| %>
+          <div class="tweet-card" >
+            <%= link_to tweet_path(tweet) do %>
+              <div class="card-header">
+                <div class="header-avatar">
+                  <% if tweet.user.avatar.attached? %>
+                    <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
+                  <% else %>
+                    <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
+                  <% end %>
+                </div>
+                <div class="header-info">
+                  <span class="name"><%= tweet.user.name %></span>
+                  <span class="username">@<%= tweet.user.username %></span>
+                  <p class="time"><%= time_ago_in_words(tweet.created_at) %> ago</p>
+                </div>
+              </div>
+              <p><%= tweet.body %></p>
+            <% end %>
+            <div class="card-buttons">
+              <div class="buttons-edit-trash">
+                <% if current_user && tweet.user.id == current_user.id %>
+                  <%= link_to tweet_path(tweet), data: { turbo_method: :delete } do %>
+                    <%= image_tag("icons/trash.png", size: "16x18") %>
+                  <% end %>
+                  <%= link_to edit_tweet_path(tweet) do %>
+                    <%= image_tag("icons/edit.png", size: "16x18") %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="buttons-like-com">
+                <span><%= image_tag("icons/tweets.png", size: "18x16") %><%= tweet.replies_count %></span>
+
+                <% if current_user && tweet.likes.find { |like| like.user.id == current_user.id } %>
+                  <%= button_to tweet_likes_path(tweet) do %>
+                    <%= image_tag("icons/like-p.png", size: "18x16") %>
+                    <%= tweet.likes_count %>
+                  <% end %>
+                <% else %>
+                  <%= button_to tweet_likes_path(tweet) do %>
+                    <%= image_tag("icons/like.png", size: "18x16") %>
+                    <%= tweet.likes_count %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="likes" class="tweets">
+        <% @user.likes.sort.each do |like| %>
+          <div class="tweet-card" >
+            <%= link_to tweet_path(like.tweet) do %>
+              <div class="card-header">
+                <div class="header-avatar">
+                  <% if like.tweet.user.avatar.attached? %>
+                    <%= image_tag(like.tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
+                  <% else %>
+                    <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
+                  <% end %>
+                </div>
+                <div class="header-info">
+                  <span class="name"><%= like.tweet.user.name %></span>
+                  <span class="username">@<%= like.tweet.user.username %></span>
+                  <p class="time"><%= time_ago_in_words(like.tweet.created_at) %> ago</p>
+                </div>
+              </div>
+              <p><%= like.tweet.body %></p>
+            <% end %>
+            <div class="card-buttons">
+              <div class="buttons-edit-trash">
+                <% if current_user && like.tweet.user.id == current_user.id %>
+                  <%= link_to tweet_path(like.tweet), data: { turbo_method: :delete } do %>
+                    <%= image_tag("icons/trash.png", size: "16x18") %>
+                  <% end %>
+                  <%= link_to edit_tweet_path(like.tweet) do %>
+                    <%= image_tag("icons/edit.png", size: "16x18") %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="buttons-like-com">
+                <span><%= image_tag("icons/tweets.png", size: "18x16") %><%= like.tweet.replies_count %></span>
+
+                <% if current_user && like.tweet.likes.find { |like| like.user.id == current_user.id } %>
+                  <%= button_to tweet_likes_path(like.tweet) do %>
+                    <%= image_tag("icons/like-p.png", size: "18x16") %>
+                    <%= like.tweet.likes_count %>
+                  <% end %>
+                <% else %>
+                  <%= button_to tweet_likes_path(like.tweet) do %>
+                    <%= image_tag("icons/like.png", size: "18x16") %>
+                    <%= like.tweet.likes_count %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
   </div>
-<% end %>
-<h3><%= @user.name %></h3>
-<p>@<%= @user.username %></p>
-<p>Joined on <%=  @user.created_at.strftime('%B %d, %Y')%></p>
-<%= link_to "Edit Profile", edit_user_registration_path %>
+
+</div>

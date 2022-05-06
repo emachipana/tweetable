@@ -19,4 +19,51 @@
       <%= render "layouts/footer" %>
     </footer>
   </body>
+  <script>
+      var propTabs = {
+
+      header: document.getElementById('links-header').firstElementChild,
+      tweet_likes: document.getElementById('tweets-likes').firstElementChild,
+      links_header: document.querySelectorAll('#links-header li a'),
+      li_header: document.querySelectorAll('#links-header li'),
+      tweet_likes_div: document.querySelectorAll('#tweets-likes > div'),
+      active: null
+
+      }
+
+      var metTabs = {
+        
+        start: function(){
+          propTabs.header.className = 'active';
+          propTabs.tweet_likes.className = 'active';
+
+          for (var i = 0; i < propTabs.links_header.length; i++) {
+            propTabs.links_header[i].addEventListener('click', metTabs.event);
+          }
+        },
+
+        event: function(e){
+          e.preventDefault();
+
+          for (var i = 0; i < propTabs.li_header.length; i++) {
+            propTabs.li_header[i].className = '';
+          }
+
+          for (var i = 0; i < propTabs.tweet_likes_div.length; i++) {
+            propTabs.tweet_likes_div[i].className = '';
+          }
+
+          this.parentElement.className = 'active';
+          propTabs.active = this.getAttribute('href');
+          document.querySelector(propTabs.active).className = 'active';
+          document.querySelector(propTabs.active).style.opacity = 0;
+          setTimeout(function(){
+            document.querySelector(propTabs.active).style.opacity = 1;
+          }, 100);
+        }
+
+      }
+
+      metTabs.start();
+    </script>
 </html>
