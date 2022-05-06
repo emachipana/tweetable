@@ -23,3 +23,34 @@
     line-height: 24px;
     color: var(--gray-300);
 }
+
+.active{
+    border-bottom: var(--primary-500) solid 2px;
+}
+
+#tweets-likes > div {
+    display: none;
+}
+
+#tweets-likes > .active {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.links-header {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 4rem;
+    margin: 2rem 0;
+}
+
+.links-header li a {
+    text-decoration: none;
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-400);
+    padding: 0 2rem;
+}
