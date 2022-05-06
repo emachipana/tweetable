@@ -15,6 +15,12 @@
         <%= form.text_area :body, placeholder: "Remember to thing before write...", class: "input input--home" %>
       </div>
 
+      <% if main_tweet %>
+        <div>
+          <%= form.hidden_field :replied_to_id, value: main_tweet.id %>
+        </div>
+      <% end %>
+
       <div>
         <%= form.submit button, class: "normal-button button--home" %>
       </div>
