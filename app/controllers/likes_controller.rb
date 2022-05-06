@@ -5,11 +5,11 @@ class LikesController < ApplicationController
     @like = @tweet.likes.new(user: current_user)
 
     if @like.save
-      redirect_to tweets_path
+      redirect_back_or_to root_path
     else
       like = Like.find_by(user: current_user, tweet: @tweet)
       like.destroy
-      redirect_to tweets_path
+      redirect_back_or_to root_path
     end
   end
 end

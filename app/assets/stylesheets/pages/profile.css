@@ -1,0 +1,25 @@
+.section-profile {
+    display: flex;
+    margin: 1rem auto;
+    flex-direction: column;
+    align-items: center;
+    max-width: 330px;
+    text-align: center;
+    gap: 1rem;
+}
+
+.edit--button {
+    width: 40%;
+}
+
+.section-profile img {
+    object-fit: cover;
+}
+
+.profile-info {
+    font-family: var(--font-subtitle);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-300);
+}
