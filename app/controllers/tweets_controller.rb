@@ -30,7 +30,7 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   def update
     if @tweet.update(tweet_params)
-      redirect_to tweets_path, notice: "Tweet was successfully updated."
+      redirect_back_or_to @tweet, notice: "Tweet was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

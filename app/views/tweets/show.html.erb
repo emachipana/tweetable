@@ -1,104 +1,16 @@
 <div class="section-login">
 <h1 class="login-title">Tweet detail</h1>  
+<%= link_to "Back", tweets_path, class: "link-session" %>
 
 <div id="tweets" class="tweets">
-<div class="tweet-card" >
-          <div class="card-header">
-            <div class="header-avatar">
-              <% if @tweet.user.avatar.attached? %>
-                <%= image_tag(@tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
-              <% else %>
-                <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
-              <% end %>
-            </div>
-            <div class="header-info">
-              <span class="name"><%= @tweet.user.name %></span>
-              <span class="username">@<%= @tweet.user.username %></span>
-              <p class="time"><%= time_ago_in_words(@tweet.created_at) %> ago</p>
-            </div>
-          </div>
-          <p><%= @tweet.body %></p>
-        <div class="card-buttons">
-          <div class="buttons-edit-trash">
-            <% if current_user && @tweet.user.id == current_user.id %>
-              <%= link_to tweet_path(@tweet), data: { turbo_method: :delete } do %>
-                <%= image_tag("icons/trash.png", size: "16x18") %>
-              <% end %>
-              <%= link_to edit_tweet_path(@tweet) do %>
-                <%= image_tag("icons/edit.png", size: "16x18") %>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="buttons-like-com">
-            <span><%= image_tag("icons/tweets.png", size: "18x16") %><%= @tweet.replies_count %></span>
-
-            <% if current_user && @tweet.likes.find { |like| like.user.id == current_user.id } %>
-              <%= button_to tweet_likes_path(@tweet) do %>
-                <%= image_tag("icons/like-p.png", size: "18x16") %>
-                <%= @tweet.likes_count %>
-              <% end %>
-            <% else %>
-              <%= button_to tweet_likes_path(@tweet) do %>
-                <%= image_tag("icons/like.png", size: "18x16") %>
-                <%= @tweet.likes_count %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
+  <%= render @tweet %>
 
   <% if user_signed_in?  %>
     <%= render "form", tweet: @new_tweet, button: "Tweet", main_tweet: @tweet %>
   <% end %>
-
   
-    <% @tweet.replies.sort.reverse.each do |tweet| %>
-      <div class="tweet-card" >
-        <%= link_to tweet_path(tweet) do %>
-          <div class="card-header">
-            <div class="header-avatar">
-              <% if tweet.user.avatar.attached? %>
-                <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
-              <% else %>
-                <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
-              <% end %>
-            </div>
-            <div class="header-info">
-              <span class="name"><%= tweet.user.name %></span>
-              <span class="username">@<%= tweet.user.username %></span>
-              <p class="time"><%= time_ago_in_words(tweet.created_at) %> ago</p>
-            </div>
-          </div>
-          <p><%= tweet.body %></p>
-        <% end %>
-        <div class="card-buttons">
-          <div class="buttons-edit-trash">
-            <% if current_user && tweet.user.id == current_user.id %>
-              <%= link_to tweet_path(tweet), data: { turbo_method: :delete } do %>
-                <%= image_tag("icons/trash.png", size: "16x18") %>
-              <% end %>
-              <%= link_to edit_tweet_path(tweet) do %>
-                <%= image_tag("icons/edit.png", size: "16x18") %>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="buttons-like-com">
-            <span><%= image_tag("icons/tweets.png", size: "18x16") %><%= tweet.replies_count %></span>
-
-            <% if current_user && tweet.likes.find { |like| like.user.id == current_user.id } %>
-              <%= button_to tweet_likes_path(tweet) do %>
-                <%= image_tag("icons/like-p.png", size: "18x16") %>
-                <%= tweet.likes_count %>
-              <% end %>
-            <% else %>
-              <%= button_to tweet_likes_path(tweet) do %>
-                <%= image_tag("icons/like.png", size: "18x16") %>
-                <%= tweet.likes_count %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+  <% @tweet.replies.sort.reverse.each do |tweet| %>
+    <%= render tweet %>
+  <% end %>
   </div>
 </div>
