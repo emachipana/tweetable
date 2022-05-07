@@ -1,5 +1,6 @@
 <div class="section-login">
   <h1 class="login-title">Editing tweet</h1>
+  <%= link_to "Back", @tweet, class: "link-session" %>
 
   <%= render "form", tweet: @tweet, button: "Update", main_tweet: nil %>
-
+</div>
