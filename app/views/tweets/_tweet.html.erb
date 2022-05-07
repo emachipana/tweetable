@@ -1,13 +1,17 @@
 <div id="<%= dom_id tweet %>">
 <div class="tweet-card" >
-        <%= link_to tweet_path(tweet) do %>
           <div class="card-header">
             <div class="header-avatar">
               <% if tweet.user.avatar.attached? %>
-                <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
+                <%= link_to user_path(tweet.user) do %>
+                  <%= image_tag(tweet.user.avatar, size: "48x48", style: "border-radius: 50px") %>
+                <% end %>
               <% else %>
-                <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
+                <%= link_to user_path(tweet.user) do %>
+                  <%= image_tag("default_image.png", size: "48x48", style: "border-radius: 50px") %>
+                <% end %>
               <% end %>
+            <%= link_to tweet_path(tweet) do %>
             </div>
             <div class="header-info">
               <span class="name"><%= tweet.user.name %></span>
@@ -19,7 +23,7 @@
         <% end %>
         <div class="card-buttons">
           <div class="buttons-edit-trash">
-            <% if current_user && tweet.user.id == current_user.id %>
+            <% if current_user && tweet.user.id == current_user.id || current_user && current_user.admin? %>
               <%= link_to tweet_path(tweet), data: { turbo_method: :delete } do %>
                 <%= image_tag("icons/trash.png", size: "16x18") %>
               <% end %>
@@ -37,16 +41,9 @@
                 <%= tweet.likes_count %>
               <% end %>
             <% else %>
-              <% if user_signed_in? %>
-                <%= button_to tweet_likes_path(tweet) do %>
-                  <%= image_tag("icons/like.png", size: "18x16") %>
-                  <%= tweet.likes_count %>
-                <% end %>
-              <% else %>
-                <%= button_to root_path do %>
-                  <%= image_tag("icons/like.png", size: "18x16") %>
-                  <%= tweet.likes_count %>
-                <% end %>
+              <%= button_to tweet_likes_path(tweet) do %>
+                <%= image_tag("icons/like.png", size: "18x16") %>
+                <%= tweet.likes_count %>
               <% end %>
             <% end %>
           </div>

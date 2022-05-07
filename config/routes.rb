@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   end
 
   root "tweets#index"
-  get "/profile", to: "users#profile"
+  resources :users, only: [:show]
 end

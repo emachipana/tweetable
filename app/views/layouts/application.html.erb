@@ -3,6 +3,7 @@
   <head>
     <title>Tweetable</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="images/default_image.png">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,9 +12,7 @@
   </head>
 
   <body>
-    <header>
-      <%= render "layouts/header" %>
-    </header>
+    <%= render "layouts/header" %>
     <%= yield %>
     <footer>
       <%= render "layouts/footer" %>
