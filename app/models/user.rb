@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :name, presence: true
 
+  has_secure_token
+
   # has_many :tweets, :through => :likes
   has_many :likes, dependent: :destroy
   has_many :tweets, dependent: :destroy
@@ -24,5 +26,9 @@ class User < ApplicationRecord
       user.email = auth_hash.info.email
       user.password = Devise.friendly_token[0, 20]
     end
+  end
+
+  def invalidate_token
+    update(token: nil)
   end
 end
