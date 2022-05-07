@@ -1,6 +1,6 @@
 <div class="section-login">
   <h1 class="login-title">Home</h1>
-
+  
   <% if user_signed_in?  %>
     <%= render "form", tweet: @tweet, button: "Tweet", main_tweet: nil %>
   <% end %>

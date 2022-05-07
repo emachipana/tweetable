@@ -13,7 +13,9 @@
     <h3 class="login-title"><%= @user.name %></h3>
     <p class="profile-info">@<%= @user.username %></p>
     <p class="profile-info">Joined on <%=  @user.created_at.strftime('%B %d, %Y')%></p>
-    <%= link_to "Edit Profile", edit_user_registration_path, class: "normal-button edit--button" %>
+    <% if current_user && @user == current_user  %>
+      <%= link_to "Edit Profile", edit_user_registration_path, class: "normal-button edit--button" %>
+    <% end %>
   </div>
 
   <ul id="links-header" class="links-header">
