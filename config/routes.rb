@@ -6,4 +6,11 @@ Rails.application.routes.draw do
 
   root "tweets#index"
   resources :users, only: [:show]
+
+  namespace :api do
+    resources :tweets
+    
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+  end
 end

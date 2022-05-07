@@ -1,28 +1,39 @@
 class ApiController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
+  
   before_action :authorize, except: %i[index show]
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  # def index; end
+  # def show; end
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render json: { message: e.message }, status: :not_found
+  end
 
   def current_user
-    @current_user ||= authenticate_token
+    @current_user ||= authenticate
   end
 
-  def authorize_token
-    authenticate_token || invalid_token
+  def not_found(error)
+    render json: { errors: error.message }, status: :not_found
   end
 
-  def authenticate_token
+  def authorize
+    authenticate || invalid_token
+  end
+
+  def authenticate
     authenticate_with_http_token do |token, _options|
-      User.find_by(token: token) # User | nil
+      User.find_by(token: token)
     end
   end
 
-  private
+  def not_authorized
+    render json: { errors: "Not authorized" }, status: :unauthorized
+  end
 
-  def respond_unauthorized(message)
-    error = { unauthorized: message }
-    render json: error, status: :unauthorized
+  def invalid_token
+    render json: { errors: "Invalid token, Please check your credentials." }, status: :unauthorized
   end
 end
