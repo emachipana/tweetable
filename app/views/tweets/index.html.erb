@@ -6,7 +6,7 @@
   <% end %>
 
   <div id="tweets" class="tweets">
-    <% @tweets.where(replied_to_id: nil).sort.each do |tweet| %>
+    <% @tweets.where(replied_to_id: nil).sort.reverse.each do |tweet| %>
       <div class="tweet-card" >
         <%= link_to tweet_path(tweet) do %>
           <div class="card-header">

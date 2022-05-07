@@ -52,7 +52,7 @@
   <% end %>
 
   
-    <% @tweet.replies.sort.each do |tweet| %>
+    <% @tweet.replies.sort.reverse.each do |tweet| %>
       <div class="tweet-card" >
         <%= link_to tweet_path(tweet) do %>
           <div class="card-header">
