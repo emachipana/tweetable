@@ -37,9 +37,16 @@
                 <%= tweet.likes_count %>
               <% end %>
             <% else %>
-              <%= button_to tweet_likes_path(tweet) do %>
-                <%= image_tag("icons/like.png", size: "18x16") %>
-                <%= tweet.likes_count %>
+              <% if user_signed_in? %>
+                <%= button_to tweet_likes_path(tweet) do %>
+                  <%= image_tag("icons/like.png", size: "18x16") %>
+                  <%= tweet.likes_count %>
+                <% end %>
+              <% else %>
+                <%= button_to root_path do %>
+                  <%= image_tag("icons/like.png", size: "18x16") %>
+                  <%= tweet.likes_count %>
+                <% end %>
               <% end %>
             <% end %>
           </div>
